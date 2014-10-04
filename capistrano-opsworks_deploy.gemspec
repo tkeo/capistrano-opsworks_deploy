@@ -8,9 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Capistrano::OpsworksDeploy::VERSION
   spec.authors       = ["Takeo Fujita"]
   spec.email         = ["takeofujita@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{deploy application using OpsWorks API}
+  spec.homepage      = "https://github.com/tkeo/capistrano-opsworks_deploy"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
