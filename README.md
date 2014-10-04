@@ -1,6 +1,6 @@
 # Capistrano::OpsworksDeploy
 
-TODO: Write a gem description
+deploy app using AWS OpsWorks API with capistrano 3
 
 ## Installation
 
@@ -20,7 +20,50 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Add this line to Capfile
+
+```
+require 'capistrano/opsworks_deploy'
+```
+
+Set AWS credentials to environment variables
+
+```
+export AWS_ACCESS_KEY_ID=...
+export AWS_SECRET_ACCESS_KEY=...
+```
+
+Write OpsWorks settings to deploy config file
+
+```ruby
+set :opsworks_stack_id, '...'
+set :opsworks_app_id, '...'
+set :opsworks_instance_ids, ['...']
+```
+
+Deploy app
+
+```
+$ cap opsworks:deploy
+```
+
+Deploy app with migration
+
+```
+$ cap opsworks:deploy:migrate
+```
+
+### Executing recipes
+
+You can also execute recipes by writing task
+
+```ruby
+desc 'execute recipe foobar'
+task :foobar do
+  set :opsworks_recipes, 'foobar'
+  invoke 'opsworks:execute_recipes'
+end
+```
 
 ## Contributing
 
