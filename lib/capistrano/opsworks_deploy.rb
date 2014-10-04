@@ -1,7 +1,4 @@
+require 'capistrano'
 require "capistrano/opsworks_deploy/version"
 
-module Capistrano
-  module OpsworksDeploy
-    # Your code goes here...
-  end
-end
+load File.expand_path('../tasks/opsworks.rake', __FILE__)
