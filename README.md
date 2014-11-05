@@ -53,6 +53,18 @@ Deploy app with migration
 $ cap opsworks:deploy:migrate
 ```
 
+Show deploy history
+```
+$ cap opsworks:deploy:history
++---------------------------+-----------------+-------------------------------+------------+
+| created_at                | command         | args                          | status     |
++---------------------------+-----------------+-------------------------------+------------+
+| 2014-11-05T14:27:07+00:00 | deploy          | {"migrate"=>["true"]}         | successful |
+| 2014-11-05T08:18:49+00:00 | deploy          | {"migrate"=>["true"]}         | successful |
+| 2014-11-04T13:53:43+00:00 | deploy          | {"migrate"=>["true"]}         | successful |
+...
+```
+
 ### Executing recipes
 
 You can also execute recipes by writing task

@@ -1,4 +1,5 @@
 require 'aws-sdk-core'
+require 'terminal-table'
 
 namespace :opsworks do
   set :opsworks_region, 'us-east-1'
@@ -25,6 +26,18 @@ namespace :opsworks do
       set :opsworks_command_name, 'deploy'
       set :opsworks_command_args, { migrate: ['true'] }
       invoke 'opsworks:deploy'
+    end
+
+    desc 'show deploy history'
+    task :history do
+      client = Aws::OpsWorks::Client.new(region: fetch(:opsworks_region))
+      response = client.describe_deployments(app_id: fetch(:opsworks_app_id))
+      table = Terminal::Table.new(headings: %w(created_at command args status)) do |t|
+        response.deployments.each do |d|
+          t << [d.created_at, d.command.name, d.command.args.to_s, d.status]
+        end
+      end
+      puts table
     end
 
     task :starting
