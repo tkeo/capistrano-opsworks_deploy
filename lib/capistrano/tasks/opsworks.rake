@@ -28,6 +28,20 @@ namespace :opsworks do
       invoke 'opsworks:deploy'
     end
 
+    desc 'rollback the last deploy'
+    task :rollback do
+      set :opsworks_command_name, 'rollback'
+      invoke 'opsworks:deploy:rollback:starting'
+      invoke 'opsworks:create_deployment'
+      invoke 'opsworks:wait_for_status_change'
+      invoke 'opsworks:deploy:rollback:finished'
+    end
+
+    namespace :rollback do
+      task :starting
+      task :finished
+    end
+
     desc 'show deploy history'
     task :history do
       client = Aws::OpsWorks::Client.new(region: fetch(:opsworks_region))
